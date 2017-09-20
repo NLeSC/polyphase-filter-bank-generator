@@ -4,7 +4,7 @@ POLYPHASE FILTER BANK GENERATOR
 Implemented by Rob V. van Nieuwpoort, http://www.vannieuwpoort.com/
 
 This program is a stand-alone version of the polyphase filter bank
-generator I designed and implemented for the LOFAR telescope. This
+generator I designed and implemented for the LOFAR telescope (http://www.lofar.org/). This
 code generates the filter weights for polyphase filter banks with
 arbitrary numbers of channels, and with configurable windows.  Window
 types currently supported are: HAMMING, BLACKMAN, GAUSSIAN, and
