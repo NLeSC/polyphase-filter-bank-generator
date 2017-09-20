@@ -18,17 +18,6 @@ set clip one
 unset clip two
 set bar 1.000000 front
 set border 31 front linetype -1 linewidth 1.000
-set timefmt z "%d/%m/%y,%H:%M"
-set zdata 
-set timefmt y "%d/%m/%y,%H:%M"
-set ydata 
-set timefmt x "%d/%m/%y,%H:%M"
-set xdata 
-set timefmt cb "%d/%m/%y,%H:%M"
-set timefmt y2 "%d/%m/%y,%H:%M"
-set y2data 
-set timefmt x2 "%d/%m/%y,%H:%M"
-set x2data 
 set boxwidth
 set style fill  empty border
 set style rectangle back fc lt -3 fillstyle   solid 1.00 border lt -1
@@ -151,5 +140,5 @@ set fontpath
 set psdir
 set fit noerrorvariables noprescale
 GNUTERM = "x11"
-plot "example.data" with linespoints
+plot "example.data" with linespoints title "filter constants"
 #    EOF
