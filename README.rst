@@ -1,7 +1,8 @@
 POLYPHASE FILTER BANK GENERATOR
 ===============================
 
-Implemented by Rob V. van Nieuwpoort, http://www.vannieuwpoort.com/ at the Netherlands eScience center (https://www.esciencecenter.nl/).
+Implemented by Rob V. van Nieuwpoort, http://www.vannieuwpoort.com/,
+at the Netherlands eScience center (https://www.esciencecenter.nl/).
 
 This program is a stand-alone version of the polyphase filter bank
 generator I designed and implemented for the LOFAR telescope (http://www.lofar.org/). This
