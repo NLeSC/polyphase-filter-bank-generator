@@ -1,7 +1,8 @@
 POLYPHASE FILTER BANK GENERATOR
 ===============================
 
-Implemented by Rob V. van Nieuwpoort, http://www.vannieuwpoort.com/
+Implemented by Rob V. van Nieuwpoort, http://www.vannieuwpoort.com/,
+at the Netherlands eScience center (https://www.esciencecenter.nl/).
 
 This program is a stand-alone version of the polyphase filter bank
 generator I designed and implemented for the LOFAR telescope (http://www.lofar.org/). This
@@ -13,6 +14,10 @@ processor (the correlator). The codes is completely generic, and can
 be used for other telescopes, or even completely different signal
 processing applications as well.
 
+dependencies:
+
+This code needs FFTW3 to run. (On Debian / Ubuntu based systems, you can use "sudo apt install libfftw3-dev" to install it.
+Gnuplot is used to show the output, but this is optional.
 
 Compiling the code:
 
@@ -26,6 +31,7 @@ You can show the filter constants of the filter bank by running "make plot".
 This will generate a small filter bank with 32 channels, and 16 filter taps per channel, using a KAISER window. 
 The filter constants are saved to a file called "example.data". Next, gnuplot is used to plot the data, saving the result to example.pdf.
 
+.. image:: example.jpg?raw=true
 
 RELATED WORK: polyphase filter bank implementations on CPUs and GPUs.
 ---------------------------------------------------------------------

@@ -45,7 +45,7 @@ set format r "% g"
 set angles radians
 unset grid
 set raxis
-set key title ""
+set key title "window type"
 set key inside right top vertical Right noreverse enhanced autotitles nobox
 set key noinvert samplen 4 spacing 1 width 0 height 0 
 set key maxcolumns 0 maxrows 0
@@ -114,11 +114,11 @@ set rrange [ * : * ] noreverse nowriteback
 set trange [ * : * ] noreverse nowriteback
 set urange [ * : * ] noreverse nowriteback
 set vrange [ * : * ] noreverse nowriteback
-set xlabel "" 
+set xlabel "filter tap" 
 set xlabel  offset character 0, 0, 0 font "" textcolor lt -1 norotate
 set x2label "" 
 set x2label  offset character 0, 0, 0 font "" textcolor lt -1 norotate
-set xrange [ * : * ] noreverse nowriteback
+set xrange [ 0 : 511 ] noreverse nowriteback
 set x2range [ * : * ] noreverse nowriteback
 set ylabel "" 
 set ylabel  offset character 0, 0, 0 font "" textcolor lt -1 rotate by -270
@@ -151,5 +151,6 @@ set fontpath
 set psdir
 set fit noerrorvariables noprescale
 GNUTERM = "x11"
-plot "example.data" with linespoints
+plot "HAMMING-example.data" with lines title "Hamming", "BLACKMAN-example.data" with lines title "Blackman", "GAUSSIAN-example.data" with lines title "Gaussian", "KAISER-example.data" with lines title "Kaiser"
+
 #    EOF
