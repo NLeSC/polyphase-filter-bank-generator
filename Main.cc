@@ -27,6 +27,6 @@ int main (int argc, char *argv[])
     }
   }
 
-  FilterBank fb = FilterBank(true, taps, channels, KAISER);
+  FilterBank fb = FilterBank(true, taps, channels, window);
   fb.printWeights();
 }

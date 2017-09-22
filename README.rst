@@ -28,10 +28,41 @@ where windowType is one of HAMMING, BLACKMAN, GAUSSIAN, KAISER.
 Visualizing the output:
 
 You can show the filter constants of the filter bank by running "make plot". 
-This will generate a small filter bank with 32 channels, and 16 filter taps per channel, using a KAISER window. 
-The filter constants are saved to a file called "example.data". Next, gnuplot is used to plot the data, saving the result to example.pdf.
+This will generate a small filter bank with 32 channels, and 16 filter taps per channel, using all different window options. 
+The filter constants are saved to a file called "[WINDOW]-example.data". Next, gnuplot is used to plot the data, saving the result to example.pdf.
 
 .. image:: example.jpg?raw=true
+
+
+The paper below describes the LOFAR real-time central processing pipeline. This production pipeline uses the filter bank generator to generate the correct polyphase filter banks at run time, depending on the telescope paramters.
+
+John W. Romein, P. Chris Broekema, Jan David Mol, Rob V. van Nieuwpoort:
+The LOFAR Correlator: Implementation and Performance Analysis,
+ACM Symposium on Principles and Practice of Parallel Programming (PPoPP’10), Bangalore, India, pp. 169-178, January, 201.0
+http://rvannieuwpoort.synology.me/papers/lofar.pdf
+
+The paper describes the usage of the filter bank as follows.
+
+The LOFAR subband data are processed by a Poly-Phase Filter bank
+(PPF) that splits a frequency subband into a number of narrower
+frequency channels. In this step, we trade time resolution for frequency
+resolution: we split a subband into N separate channels, but
+with an N-times lower sampling rate per channel. With the higher
+frequency resolution, we can remove RFI artifacts with a higher accuracy
+later in the pipeline. For LOFAR, typically a 195 KHz subband is split
+into 256 channels of 763 Hz, but the filter supports any reasonable
+power-of-two number of channels for different observation modes.
+The PPF consists of two parts. First, the data are filtered using
+Finite Impulse Response (FIR) filters. A FIR filter simply multiplies
+a sample with a real weight factor, and also adds a number
+of weighted samples from the past. Since we have to support different
+numbers of channels, our software automatically designs a
+filter bank with the desired properties and number of channels at
+run time, generating the FIR filter weights on the fly. This again
+demonstrates the flexibility of a software solution. For performance
+reasons, the implementation of the filter is done in assembly. Next,
+the filtered data are Fourier Transformed.
+
 
 RELATED WORK: polyphase filter bank implementations on CPUs and GPUs.
 ---------------------------------------------------------------------
