@@ -50,17 +50,20 @@ Please cite this paper if this code is useful to you.
 
 
 dependencies:
+-------------
 
 This code needs FFTW3 to run. (On Debian / Ubuntu based systems, you can use "sudo apt install libfftw3-dev" to install it.
 Gnuplot is used to show the output, but this is optional.
 
 Compiling the code:
+-------------------
 
 just type "make". The code should be compiled, and you should now have an executable called "polyphase-filter-bank-generator".
 You can run the code as follows: ./polyphase-filter-bank-generator [nrChannels] [nrTaps] [windowType]", 
 where windowType is one of HAMMING, BLACKMAN, GAUSSIAN, KAISER.
 
 Visualizing the output:
+-----------------------
 
 You can show the filter constants of the filter bank by running "make plot". 
 This will generate a small filter bank with 32 channels, and 16 filter taps per channel, using all different window options. 
