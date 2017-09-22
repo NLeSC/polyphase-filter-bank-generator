@@ -8,11 +8,16 @@ class FilterBank
   public:
 
   // This constructor designs a new filter with the specified parameters, and initializes the weights array.
-  FilterBank(bool verbose, unsigned taps, unsigned channels, WindowType windowType);
+  FilterBank(bool verbose, unsigned channels, unsigned taps, WindowType windowType);
 
   unsigned getNrTaps();
-
+  unsigned getNrChannels();
+  
   float *getWeights(unsigned channel);
+
+  // Reverse the order of the taps. This can be useful, because FIR implementatons might run over the taps backwards for efficiency.
+  // This is the case for LOFAR, for example.
+  void reverseTaps();
 
   // Print the weights array in the natural order, in a format that can be read by gnuplot.
   void printWeights();

@@ -14,9 +14,9 @@ using namespace std;
 
 // For documentation on this class, see the header file.
 
-FilterBank::FilterBank(bool verbose, unsigned taps, unsigned channels, WindowType windowType)
+FilterBank::FilterBank(bool verbose, unsigned channels, unsigned taps, WindowType windowType)
 :
-  itsWindowType(windowType), itsNrTaps(taps), itsNrChannels(channels), itsVerbose(verbose)
+  itsWindowType(windowType), itsNrChannels(channels), itsNrTaps(taps), itsVerbose(verbose)
 {
   generate_filter();
 }
@@ -25,6 +25,12 @@ FilterBank::FilterBank(bool verbose, unsigned taps, unsigned channels, WindowTyp
 unsigned FilterBank::getNrTaps()
 {
   return itsNrTaps;
+}
+
+
+unsigned FilterBank::getNrChannels()
+{
+  return itsNrChannels;
 }
 
 
@@ -202,7 +208,7 @@ void FilterBank::generate_fir_filter(unsigned n, double w, const double window[]
   // for all filters where the order is a power of two minus 1, grid_n = n+1;
   unsigned grid_n = nextPowerOfTwo(n + 1);
 
-  unsigned ramp_n = 2; // grid_n/20; // FIXME
+  unsigned ramp_n = grid_n/20;
 
   // Apply ramps to discontinuities
   // this is a low pass filter
@@ -410,18 +416,19 @@ void FilterBank::generate_filter()
       index++;
     }
   }
+}
 
-#if 0
-  cerr << "final taps: ";
-  for(unsigned channel=0; channel<itsNrChannels; channel++) {
-    cerr << "channel: " << channel << "| ";
-    for(unsigned tap=0; tap<itsNrTaps; tap++) {
-      cerr << " " << weights[channel*itsNrTaps+tap];
+
+void FilterBank::reverseTaps() {
+  for (unsigned channel = 0; channel < itsNrChannels; channel++) {
+    for (unsigned tap = 0; tap < itsNrTaps/2; tap++) {
+      float tmp = weights[channel*itsNrTaps + itsNrTaps - tap - 1];
+      weights[channel * itsNrTaps + itsNrTaps - tap - 1] = weights[channel * itsNrTaps + tap];
+      weights[channel * itsNrTaps + tap] = tmp;
     }
   }
-  cerr << endl;
-#endif
 }
+
 
 // Print the weights array in the natural order, in a format that can be read by gnuplot.
 void FilterBank::printWeights() {

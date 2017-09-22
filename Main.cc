@@ -1,8 +1,12 @@
 #include "FilterBank.h"
+#include "PPF.h"
+
 #include <stdlib.h>
+#include <string.h>
 #include <iostream>
 
 using namespace std;
+
 
 int main (int argc, char *argv[])
 {
@@ -27,6 +31,27 @@ int main (int argc, char *argv[])
     }
   }
 
-  FilterBank fb = FilterBank(true, taps, channels, window);
+  FilterBank fb = FilterBank(false, channels, taps, window);
   fb.printWeights();
+  fb.reverseTaps();
+  
+#if 0
+  vector<complex<float> > response(taps);
+  PPF ppf(channels, taps);
+  ppf.getImpulseResponse(0, response);
+
+  for(int i=0; i<taps; i++) {
+    cerr << response[i].real() << endl;
+  }
+#endif
+
+#if 0
+  vector<complex<float> > response(taps);
+  PPF ppf(channels, taps);
+  ppf.getFrequencyResponse(0, response);
+
+  for(int i=0; i<taps; i+=2) {
+    cerr << response[i].real() << endl;
+  }
+#endif
 }
