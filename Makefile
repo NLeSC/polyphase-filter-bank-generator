@@ -1,7 +1,7 @@
 CC		= g++
 CC_FLAGS	= -g
 
-CC_SOURCES	= FilterBank.cc Main.cc FIR.cc PPF.cc
+CC_SOURCES	= FilterBank.cc Main.cc
 
 CC_OBJECTS	= $(CC_SOURCES:%.cc=%.o)
 

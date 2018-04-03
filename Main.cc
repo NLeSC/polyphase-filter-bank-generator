@@ -1,5 +1,10 @@
+#define USE_PPF 0
+
 #include "FilterBank.h"
+
+#if USE_PPF
 #include "PPF.h"
+#endif
 
 #include <stdlib.h>
 #include <string.h>
@@ -35,7 +40,7 @@ int main (int argc, char *argv[])
   fb.printWeights();
   fb.reverseTaps();
   
-#if 0
+#if USE_PPF
   vector<complex<float> > response(taps);
   PPF ppf(channels, taps);
   ppf.getImpulseResponse(0, response);
@@ -45,7 +50,7 @@ int main (int argc, char *argv[])
   }
 #endif
 
-#if 0
+#if USE_PPF
   vector<complex<float> > response(taps);
   PPF ppf(channels, taps);
   ppf.getFrequencyResponse(0, response);
