@@ -10,7 +10,7 @@ code generates the filter weights for polyphase filter banks with
 arbitrary numbers of channels, and with configurable windows.  Window
 types currently supported are: HAMMING, BLACKMAN, GAUSSIAN, and
 KAISER.  The original code is a part of the LOFAR real-time central
-processor (the correlator). The codes is completely generic, and can
+processor (the correlator). The code is completely generic, and can
 be used for other telescopes, or even completely different signal
 processing applications as well.
 
@@ -22,7 +22,7 @@ the telescope paramters.
 John W. Romein, P. Chris Broekema, Jan David Mol, Rob V. van Nieuwpoort:
 The LOFAR Correlator: Implementation and Performance Analysis,
 ACM Symposium on Principles and Practice of Parallel Programming (PPoPP’10), Bangalore, India, pp. 169-178, January, 2010.
-http://rvannieuwpoort.synology.me/papers/lofar.pdf
+https://vannieuwpoort.com/wp-content/uploads/lofar.pdf
 
 The paper describes the usage of the filter bank as follows.
 
@@ -80,7 +80,7 @@ You can use the filter bank constants generated with this generator program to c
 I also worked on polyphase filter bank implementations for GPUs and multi-core processors.
 The code runs on Intel CPUs (written in C), NVIDIA (with Cuda) and AMD GPUs (with OpenCL), and on the simulated MicroGrid architecture. 
 The source code for the filter banks is available here:
-http://rvannieuwpoort.synology.me/software/ppf.tgz
+https://vannieuwpoort.com/wp-content/uploads/2023/05/ppf.zip
 
 For more information, see this paper:
 
@@ -88,12 +88,12 @@ Karel van der Veldt, Rob van Nieuwpoort, Ana Lucia Varbanescu and Chris Jesshope
 A Polyphase Filter For GPUs And Multi-Core Processors
 First Workshop on High Performance Computing in Astronomy (AstroHPC 2012)
 In conjunction with the 21-st International ACM Symposium on High-Performance Parallel and Distributed Computing (HPDC 2012) June 19, 2012, Delft, the Netherlands.
-http://rvannieuwpoort.synology.me/papers/astro05-vanderveldt.pdf.
+https://vannieuwpoort.com/wp-content/uploads/astro05-vanderveldt.pdf.
 
 For more details on the implementation, you can also have a
 look at Karel’s master thesis:
 A Polyphase Filter For GPUs And Multi-Core Processors.
-http://rvannieuwpoort.synology.me/masters-theses/Karel-van-der-Veldt.pdf
+https://vannieuwpoort.com/wp-content/uploads/Karel-van-der-Veldt.pdf
 
 
 
