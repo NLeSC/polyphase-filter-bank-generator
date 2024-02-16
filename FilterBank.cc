@@ -40,6 +40,12 @@ float *FilterBank::getWeights(unsigned channel)
 }
 
 
+float *FilterBank::getWeights()
+{
+  return weights;
+}
+
+
 WindowType FilterBank::getWindowTypeFromString(char* s)
 {
   if(!strcmp(s, "HAMMING")) {
@@ -425,6 +431,18 @@ void FilterBank::reverseTaps() {
       float tmp = weights[channel*itsNrTaps + itsNrTaps - tap - 1];
       weights[channel * itsNrTaps + itsNrTaps - tap - 1] = weights[channel * itsNrTaps + tap];
       weights[channel * itsNrTaps + tap] = tmp;
+    }
+  }
+}
+
+
+void FilterBank::negateWeights() {
+  for (int tap = itsNrTaps - 1; tap >= 0; tap--) { // store the taps in reverse!
+    for (unsigned channel = 0; channel < itsNrChannels; channel++) {
+      // Negate all odd channels
+      if (channel % 2 != 0) {
+        weights[channel*itsNrTaps+tap] = -weights[channel*itsNrTaps+tap];
+      }
     }
   }
 }

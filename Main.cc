@@ -1,10 +1,5 @@
-#define USE_PPF 0
-
 #include "FilterBank.h"
-
-#if USE_PPF
 #include "PPF.h"
-#endif
 
 #include <stdlib.h>
 #include <string.h>
@@ -16,7 +11,9 @@ using namespace std;
 int main (int argc, char *argv[])
 {
   unsigned channels = 4;
-  unsigned taps = 16;
+  unsigned taps = 256;
+  unsigned nrSamplesPerIntegration = 64;
+
   WindowType window = KAISER;
   
   if(argc == 1) {
@@ -37,12 +34,43 @@ int main (int argc, char *argv[])
   }
 
   FilterBank fb = FilterBank(false, channels, taps, window);
-  fb.printWeights();
+  //fb.printWeights();
   fb.reverseTaps();
+
+  FIR fir(taps, false);
+  fir.setWeights(fb.getWeights(0));
+  fir.processNextSample(fcomplex(1,0));
+
+  for (int i = 1; i < taps; i++)
+  {
+    fcomplex sample = fir.processNextSample(fcomplex(0,0));
+    cerr  << sample.real() << endl;
+  }
   
-#if USE_PPF
-  vector<complex<float> > response(taps);
-  PPF ppf(channels, taps);
+
+#if 0
+  // Do some filtering
+  // in = 1D array of size nrSamplesPerIntegration * nrChannels
+  // out = [nrChannels][nrSamplesPerIntegration]
+
+  vector<fcomplex> in(nrSamplesPerIntegration * channels);
+  in[0] = fcomplex(1,0.0f);
+/*
+  for(int i=0; i< nrSamplesPerIntegration * channels; i++) {
+    in[i] = fcomplex(i,0.0f);
+    cerr << "i = " << in[i] << endl;
+  }
+*/
+  boost::multi_array<fcomplex, 2> out(boost::extents[channels][nrSamplesPerIntegration]);
+
+  PPF ppf(channels, taps, nrSamplesPerIntegration, false);
+
+  ppf.filter(in, out);
+  for(int i=0; i< nrSamplesPerIntegration; i++) {
+    cerr << "out = " << out[0][i] << endl;
+  }
+#endif
+#if 0
   ppf.getImpulseResponse(0, response);
 
   for(int i=0; i<taps; i++) {
@@ -50,7 +78,7 @@ int main (int argc, char *argv[])
   }
 #endif
 
-#if USE_PPF
+#if 0
   vector<complex<float> > response(taps);
   PPF ppf(channels, taps);
   ppf.getFrequencyResponse(0, response);

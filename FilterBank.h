@@ -13,12 +13,21 @@ class FilterBank
   unsigned getNrTaps();
   unsigned getNrChannels();
   
-  float *getWeights(unsigned channel);
+  float *getWeights(unsigned channel); // returns taps weights
+  float* getWeights(); // returns all weights: [nrChannels][taps]
 
   // Reverse the order of the taps. This can be useful, because FIR implementatons might run over the taps backwards for efficiency.
-  // This is the case for LOFAR, for example.
+  // This is the case for the LOFAR telescope, for example.
   void reverseTaps();
 
+
+  // In CEP, the first subband is from -98 KHz to 98 KHz, rather than from 0 to 195 KHz.
+  // To avoid that the FFT outputs the channels in the wrong order (from 128 to
+  // 255 followed by channels 0 to 127), we multiply each second FFT input by -1.
+  // This is efficiently achieved by negating the FIR filter constants of all
+  // uneven FIR filters.
+  void negateWeights();
+  
   // Print the weights array in the natural order, in a format that can be read by gnuplot.
   void printWeights();
 
@@ -53,7 +62,7 @@ private:
   const unsigned itsNrChannels;
   const bool itsVerbose;
 
-  float* weights; // [nrChannels][taps];
+  float* weights; // [nrChannels][taps]
 };
 
 #endif // FILTER_BANK_H
