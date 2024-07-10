@@ -1,0 +1,45 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: polyphase filter bank generator
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Rob
+    name-particle: van
+    family-names: Nieuwpoort
+    email: r.v.van.nieuwpoort@liacs.leidenuniv.nl
+    affiliation: Leiden University
+    orcid: 'https://orcid.org/0000-0002-2947-9444'
+identifiers:
+  - type: doi
+    value: 10.1145/1693453.1693477
+    description: Paper descibing the LOFAR pipeline
+repository-code: 'https://github.com/NLeSC/polyphase-filter-bank-generator'
+url: 'https://github.com/NLeSC/polyphase-filter-bank-generator'
+abstract: >-
+  This program is a stand-alone version of the polyphase
+  filter bank generator I designed and implemented for the
+  LOFAR telescope (http://www.lofar.org/). This code
+  generates the filter weights for polyphase filter banks
+  with arbitrary numbers of channels, and with configurable
+  windows. The original code is a part of the LOFAR
+  real-time central processor (the correlator). The code is
+  completely generic, and can be used for other telescopes,
+  or even completely different signal processing
+  applications as well. The LOFAR subband data are processed
+  by a Poly-Phase Filter bank (PPF) that splits a frequency
+  subband into a number of narrower frequency channels. In
+  this step, we trade time resolution for frequency
+  resolution: we split a subband into N separate channels,
+  but with an N-times lower sampling rate per channel.
+keywords:
+  - LOFAR
+  - polyphase
+  - filterbank
+  - radio astronomy
+  - signal processing
+license: Apache-2.0
